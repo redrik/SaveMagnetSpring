@@ -1,7 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function () {
     let magnetId = 0;
 
-    $(document).on("click", "#div_magnet_table table button.btn_delete", function() {
+    $(document).on("click", "#div_magnet_table table button.btn_delete", function () {
         let btn_id = (event.srcElement.id);
         magnetId = btn_id.split("_")[2];
 
@@ -11,18 +11,18 @@ $(document).ready(function(){
         $("#model-delete-all-btn").css({"display": "none"});
     });
 
-    $(document).on("click", "button.btn_all_delete", function() {
+    $(document).on("click", "button.btn_all_delete", function () {
         $("div.modal-body")
             .text("Do you want delete all magnets ?");
         $("#model-delete-btn").css({"display": "none"});
         $("#model-delete-all-btn").css({"display": "inline"});
     });
 
-    $(document).on("click", "#model-delete-btn", function() {
+    $(document).on("click", "#model-delete-btn", function () {
         $.ajax({
             url: '/api/magnet/deletebyid/' + magnetId,
             type: 'DELETE',
-            success: function(response) {
+            success: function (response) {
                 $("div.modal-body")
                     .text("Delete successfully a magnet with id = " + magnetId + "!");
 
@@ -34,18 +34,18 @@ $(document).ready(function(){
                 $("#" + row_id).remove();
                 $("#div_magnet_updating").css({"display": "none"});
             },
-            error: function(error){
+            error: function (error) {
                 console.log(error);
                 $("#div_magnet_updating").css({"display": "none"});
                 alert("Error -> " + error);
             }
         });
     });
-    $(document).on("click", "#model-delete-all-btn", function() {
+    $(document).on("click", "#model-delete-all-btn", function () {
         $.ajax({
             url: '/api/magnet/deleteAllMagnets/',
             type: 'DELETE',
-            success: function(response) {
+            success: function (response) {
                 $("div.modal-body")
                     .text("Delete successfully all magnets!");
 
@@ -54,7 +54,7 @@ $(document).ready(function(){
 
                 location.reload();
             },
-            error: function(error){
+            error: function (error) {
                 console.log(error);
                 $("#div_magnet_updating").css({"display": "none"});
                 alert("Error -> " + error);
