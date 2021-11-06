@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +21,7 @@ public class RestAPIController {
     @PostMapping("/create")
     public ResponseEntity<Message> addNewMagnet(@RequestBody Magnet magnet) {
         try {
-
             magnetServices.saveMagnets(magnet);
-
             return new ResponseEntity<Message>(new Message("Upload Successfully!",
                     Arrays.asList(magnet), ""), HttpStatus.OK);
         } catch (Exception e) {
